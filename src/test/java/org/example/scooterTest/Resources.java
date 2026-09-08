@@ -9,7 +9,6 @@ public class Resources {
     public static final String answer6Text = "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.";
     public static final String answer7Text = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.";
     public static final String answer8Text = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
-
     public static final String orderHeader = "Для кого самокат";
     public static final String confirmHeader = "Посмотреть статус";
 }

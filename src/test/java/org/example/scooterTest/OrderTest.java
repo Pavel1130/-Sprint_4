@@ -4,10 +4,9 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import static org.example.scooterTest.Resources.confirmHeader;
 
 @RunWith(Parameterized.class)
 public class OrderTest {
@@ -34,47 +33,36 @@ public class OrderTest {
         this.comment = comment;
     }
 
-    @Parameterized.Parameters
+    @Parameters
     public static Object[][] getDateSetForOrder() {
-        return new Object[][] {
-                {"Иван", "Иванов", "г. Москва, ул. Пушкина, д.10", "Театральная", "89151234567", "01.01.2050", "сутки", "чёрный жемчуг", "Не звонить в дверь"},
-                {"Ирина", "Авдеева", "проспект Маяковского 6", "Маяковская", "+79657654321", "10.10.2030", "двое суток", "серая безысходность", "Привезите чистый самокат"},
-        };
+        return new Object[][]{{"Иван", "Иванов", "г. Москва, ул. Пушкина, д.10", "Театральная", "89151234567", "01.01.2050", "сутки", "чёрный жемчуг", "Не звонить в дверь"}, {"Ирина", "Авдеева", "проспект Маяковского 6", "Маяковская", "+79657654321", "10.10.2030", "двое суток", "серая безысходность", "Привезите чистый самокат"}};
     }
 
     @Test
     public void OrderPositiveTest() {
-        // Создать веб-драйвер для Firefox
-        driver = new FirefoxDriver();
-        // Открыть страницу заказа Яндекс Самокат
-        driver.get("https://qa-scooter.praktikum-services.ru");
-        // Создать объект класса с домашней страницей
-        HomePageScooter objHomePage = new HomePageScooter(driver);
-        // Нажать на кнопку Заказать на чердаке
+        this.driver = new FirefoxDriver();
+        this.driver.get("https://qa-scooter.praktikum-services.ru");
+        HomePageScooter objHomePage = new HomePageScooter(this.driver);
         objHomePage.clickHeaderOrderButton();
-        // Создать объект класса со страницей заказа
-        OrderPageScooter objOrderPage = new OrderPageScooter(driver);
-        // Принять куки
+        OrderPageScooter objOrderPage = new OrderPageScooter(this.driver);
         objOrderPage.acceptCookieButtonClick();
-        // Позитивный сценарий оформления заказа
-        objOrderPage.setName(name);
-        objOrderPage.setSurname(surname);
-        objOrderPage.setAddress(address);
-        objOrderPage.setSubway(subway);
-        objOrderPage.setPhoneNumber(phoneNumber);
+        objOrderPage.setName(this.name);
+        objOrderPage.setSurname(this.surname);
+        objOrderPage.setAddress(this.address);
+        objOrderPage.setSubway(this.subway);
+        objOrderPage.setPhoneNumber(this.phoneNumber);
         objOrderPage.clickOrderNextButton();
-        objOrderPage.setDate(date);
-        objOrderPage.setRentalPeriod(rentalPeriod);
-        objOrderPage.setColor(color);
-        objOrderPage.setComment(comment);
+        objOrderPage.setDate(this.date);
+        objOrderPage.setRentalPeriod(this.rentalPeriod);
+        objOrderPage.setColor(this.color);
+        objOrderPage.setComment(this.comment);
         objOrderPage.clickOrderCreateButton();
         objOrderPage.clickOrderConfirmButton();
-        // Проверить, что открылась страница успешного создания заказа
-        objOrderPage.isPageOpen(objOrderPage.getConfirmHeader() ,confirmHeader);
+        objOrderPage.isPageOpen(objOrderPage.getConfirmHeader(), "Посмотреть статус");
     }
 
     @After
     public void teardown() {
-        driver.quit();
+        this.driver.quit();
     }
 }
