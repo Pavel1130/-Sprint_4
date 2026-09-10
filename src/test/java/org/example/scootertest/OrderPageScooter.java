@@ -1,4 +1,4 @@
-package org.example.scooterTest;
+package org.example.scootertest;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;

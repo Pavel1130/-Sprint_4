@@ -1,4 +1,4 @@
-package org.example.scooterTest;
+package org.example.scootertest;
 
 import org.junit.After;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 @RunWith(Parameterized.class)
 public class OrderTest {
@@ -40,7 +40,7 @@ public class OrderTest {
 
     @Test
     public void OrderPositiveTest() {
-        this.driver = new FirefoxDriver();
+        this.driver = new ChromeDriver();
         this.driver.get("https://qa-scooter.praktikum-services.ru");
         HomePageScooter objHomePage = new HomePageScooter(this.driver);
         objHomePage.clickHeaderOrderButton();
